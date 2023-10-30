@@ -1,9 +1,11 @@
 from app.schemas.product import Product
+from app.models.user import User
+from app.schemas.user import UserSignUp
 
-prod = Product(id= 1,  name= "mouse", category = "tech", description= "Wireless mouse for PC",  rating= 4.5,  cost= 5)
-
-dictt =prod.model_dump()
-if dictt["id"]:
-    dictt.pop("id")
-
-print(dictt)
+user_su = UserSignUp(email='admin@admin.com', username='admin', password='admin')
+print(user_su)
+user_su_dict = user_su.model_dump()
+password = user_su_dict.pop('password')
+user = User(**user_su_dict)
+user.hash_password(password=password)
+print(user.__dict__)

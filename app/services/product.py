@@ -12,7 +12,7 @@ class ProductService():
     
     def get_product_by_id(self, id: int):
         """Return a product by id."""
-        results = self.db.query(ProductModel).all()
+        results = self.db.query(ProductModel).filter(ProductModel.id == id).first()
         return results
     
     def get_products_by_category(self, category:str):

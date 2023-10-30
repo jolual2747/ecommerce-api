@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     DB_NAME:str
     PGADMIN_DEFAULT_EMAIL:str
     PGADMIN_DEFAULT_PASSWORD:str
+    SECRET_KEY:str
     class Config:
         env_file:str = '.env'
 
