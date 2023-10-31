@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     PGADMIN_DEFAULT_PASSWORD:str
     SECRET_KEY:str
     ALGORITHM:str
+    TEST_USER:str
+    TEST_PASSWORD:str
     class Config:
         env_file:str = '.env'
 
