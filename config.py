@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     PGADMIN_DEFAULT_EMAIL:str
     PGADMIN_DEFAULT_PASSWORD:str
     SECRET_KEY:str
+    ALGORITHM:str
     class Config:
         env_file:str = '.env'
 
