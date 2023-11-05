@@ -5,6 +5,7 @@ __pycache__/
 
 #enviroments
 .env
+variables.sh
 
 # C extensions
 *.so

@@ -2,14 +2,12 @@ from app.schemas.user import UserSignUp
 from app.models.user import User
 from app.auth.hashing import Hashing
 from datetime import timedelta, datetime
-from config import get_settings
 from jose import jwt
 
 class UserService:
     def __init__(self, db):
         self.db = db
         self._Hashing = Hashing()
-        self._settings = get_settings()
 
     def signUp(self, user: UserSignUp):
         """Creates new users."""

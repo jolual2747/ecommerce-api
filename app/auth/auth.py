@@ -2,11 +2,10 @@ from datetime import timedelta, datetime
 from fastapi import Depends, HTTPException
 from starlette import status
 from app.schemas.token import Token, TokenData
-from config import get_settings
+import os
 from jose import jwt, JWTError
 from fastapi.security import OAuth2PasswordBearer
 
-settings = get_settings()
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='/auth/login')
 
 def create_access_token(username: str, id: int, expires_mins:int = 20):
@@ -14,12 +13,12 @@ def create_access_token(username: str, id: int, expires_mins:int = 20):
     encode = {'sub': username, 'id': id}
     expires = datetime.utcnow() + timedelta(minutes=expires_mins)
     encode.update({'exp':expires})
-    return jwt.encode(encode, key = settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    return jwt.encode(encode, key = os.environ.get("SECRET_KEY"), algorithm=os.environ.get("ALGORITHM"))
 
 async def get_current_user(token:Token = Depends(oauth2_bearer)):
     """Gets current user and validates token."""
     try:
-        payload = jwt.decode(token, key=settings.SECRET_KEY, algorithms = [settings.ALGORITHM])
+        payload = jwt.decode(token, key=os.environ.get("SECRET_KEY"), algorithms = [os.environ.get("ALGORITHM")])
         username: str = payload.get('sub')
         id: int = payload.get('id')
         if username is None or id is None:
