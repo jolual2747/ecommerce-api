@@ -6,7 +6,7 @@ from typing import Generator
 
 settings = get_settings()
 
-database_url = f'postgresql://{settings.DB_USERNAME}:{settings.DB_PASSWORD}@localhost:5051/{settings.DB_NAME}'
+database_url = f'postgresql://{settings.DB_USERNAME}:{settings.DB_PASSWORD}@db:5432/{settings.DB_NAME}'
 engine = create_engine(database_url, echo = True)
 
 SessionLocal = sessionmaker(autoflush=False, autocommit = False, bind = engine)

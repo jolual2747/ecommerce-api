@@ -19,8 +19,7 @@ class UserService:
 
     def authenticate_user(self, username, password):
         """Login a user."""
-        user = self.db.query(User).filter(User.username == username).first()   
-        print(user)     
+        user = self.db.query(User).filter(User.username == username).first()       
         if not user:
             return False
         if not self._Hashing.verify_password(password, user.hashed_password):
