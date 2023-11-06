@@ -39,15 +39,33 @@ jobs:
           push: true
           context: .
           tags: jolual2747/ecommerce:latest
-        #env:
-        #  DB_USERNAME: ${{ vars.DB_USERNAME }}
-        #  DB_PASSWORD: ${{ vars.DB_PASSWORD }}
-        #  DB_NAME: ${{ vars.DB_NAME }}
-        #  HOST_SERVER: ${{ vars.HOST_SERVER }}
-        #  DB_SERVER_PORT: ${{ vars.DB_SERVER_PORT }}
-        #  SSL_MODE: ${{ vars.SSL_MODE }}
-        #  PGADMIN_DEFAULT_EMAIL: ${{ vars.PGADMIN_DEFAULT_EMAIL }}
-        #  PGADMIN_DEFAULT_PASSWORD: ${{ vars.PGADMIN_DEFAULT_PASSWORD }}
-        #  SECRET_KEY: ${{ vars.SECRET_KEY }}
-        #  ALGORITHM: ${{ vars.ALGORITHM }}
-          
+  deploy-azure:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: AZ CLI login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
+      - name: Run Azure CLI commands
+        run: | 
+          az containerapp up \
+          --name my-container-app \
+          --resource-group my-container-apps \
+          --location centralus \
+          --environment 'my-container-apps' \
+          --image jolual2747/ecommerce:latest \
+          --target-port 8080 \
+          --ingress external \
+          --query properties.configuration.ingress.fqdn \
+          --env-vars \
+            DB_USERNAME={{ secrets.DB_USERNAME}} \
+            DB_PASSWORD={{ secrets.DB_PASSWORD}} \
+            DB_NAME={{ secrets.DB_NAME}} \
+            HOST_SERVER={{ secrets.HOST_SERVER}} \
+            DB_SERVER_PORT={{ secrets.DB_SERVER_PORT}} \
+            SSL_MODE={{ secrets.SSL_MODE}} \
+            SECRET_KEY={{ secrets.SECRET_KEY}} \
+            ALGORITHM={{ secrets.ALGORITHM}} 

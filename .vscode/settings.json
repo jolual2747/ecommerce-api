@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "file:///c%3A/Users/ASUS/Documents/Especializaci%C3%B3n/Cursos%20externos/FastAPI/ecommerce-api/.github/workflows/build-deploy.yml"
+    }
+}
