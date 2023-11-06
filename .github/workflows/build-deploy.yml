@@ -21,17 +21,6 @@ jobs:
   docker:
     needs: test
     runs-on: ubuntu-latest
-    env:
-      DB_USERNAME: ${{ vars.DB_USERNAME }}
-      DB_PASSWORD: ${{ vars.DB_PASSWORD }}
-      DB_NAME: ${{ vars.DB_NAME }}
-      HOST_SERVER: ${{ vars.HOST_SERVER }}
-      DB_SERVER_PORT: ${{ vars.DB_SERVER_PORT }}
-      SSL_MODE: ${{ vars.SSL_MODE }}
-      PGADMIN_DEFAULT_EMAIL: ${{ vars.PGADMIN_DEFAULT_EMAIL }}
-      PGADMIN_DEFAULT_PASSWORD: ${{ vars.PGADMIN_DEFAULT_PASSWORD }}
-      SECRET_KEY: ${{ vars.SECRET_KEY }}
-      ALGORITHM: ${{ vars.ALGORITHM }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,4 +39,15 @@ jobs:
           push: true
           context: .
           tags: jolual2747/ecommerce:latest
+        env:
+          DB_USERNAME: ${{ vars.DB_USERNAME }}
+          DB_PASSWORD: ${{ vars.DB_PASSWORD }}
+          DB_NAME: ${{ vars.DB_NAME }}
+          HOST_SERVER: ${{ vars.HOST_SERVER }}
+          DB_SERVER_PORT: ${{ vars.DB_SERVER_PORT }}
+          SSL_MODE: ${{ vars.SSL_MODE }}
+          PGADMIN_DEFAULT_EMAIL: ${{ vars.PGADMIN_DEFAULT_EMAIL }}
+          PGADMIN_DEFAULT_PASSWORD: ${{ vars.PGADMIN_DEFAULT_PASSWORD }}
+          SECRET_KEY: ${{ vars.SECRET_KEY }}
+          ALGORITHM: ${{ vars.ALGORITHM }}
           
