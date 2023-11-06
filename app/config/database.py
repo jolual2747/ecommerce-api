@@ -14,6 +14,8 @@ ssl_mode = urllib.parse.quote_plus(str(os.environ.get('SSL_MODE','prefer')))
 DATABASE_URL = 'postgresql://{}:{}@{}:{}/{}?sslmode={}'.format(db_username, db_password, host_server, db_server_port, database_name, ssl_mode)
 engine = create_engine(DATABASE_URL, echo = True)
 print(DATABASE_URL)
+print(DATABASE_URL)
+print(DATABASE_URL)
 
 SessionLocal = sessionmaker(autoflush=False, autocommit = False, bind = engine)
 Base = declarative_base()
