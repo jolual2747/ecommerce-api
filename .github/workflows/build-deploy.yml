@@ -21,6 +21,17 @@ jobs:
   docker:
     needs: test
     runs-on: ubuntu-latest
+    env:
+      DB_USERNAME=${DB_USERNAME}
+      DB_PASSWORD=${DB_PASSWORD}
+      DB_NAME=${DB_NAME}
+      HOST_SERVER=${HOST_SERVER}
+      DB_SERVER_PORT=${DB_SERVER_PORT}
+      SSL_MODE=${SSL_MODE}
+      PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+      SECRET_KEY=${SECRET_KEY}
+      ALGORITHM=${ALGORITHM}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
