@@ -21,22 +21,34 @@ jobs:
   docker:
     needs: test
     runs-on: ubuntu-latest
-    env:
-      DB_USERNAME=${DB_USERNAME}
-      DB_PASSWORD=${DB_PASSWORD}
-      DB_NAME=${DB_NAME}
-      HOST_SERVER=${HOST_SERVER}
-      DB_SERVER_PORT=${DB_SERVER_PORT}
-      SSL_MODE=${SSL_MODE}
-      PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-      SECRET_KEY=${SECRET_KEY}
-      ALGORITHM=${ALGORITHM}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
+      - name: Variables 
+        run: |
+          echo "db_username : $DB_USERNAME"
+          echo "db_password : $DB_PASSWORD"
+          echo "db_name : $DB_NAME"
+          echo "host_server : $HOST_SERVER"
+          echo "db_server_port : $DB_SERVER_PORT"
+          echo "ssl_mode : $SSL_MODE"
+          echo "pgadmin_default_email : $PGADMIN_DEFAULT_EMAIL"
+          echo "pgadmin_default_password : $PGADMIN_DEFAULT_PASSWORD"
+          echo "secret_key : $SECRET_KEY"
+          echo "algorithm : $ALGORITHM"
+        env:
+          DB_USERNAME: ${{ vars.DB_USERNAME }}
+          DB_PASSWORD: ${{ vars.DB_PASSWORD }}
+          DB_NAME: ${{ vars.DB_NAME }}
+          HOST_SERVER: ${{ vars.HOST_SERVER }}
+          DB_SERVER_PORT: ${{ vars.DB_SERVER_PORT }}
+          SSL_MODE: ${{ vars.SSL_MODE }}
+          PGADMIN_DEFAULT_EMAIL: ${{ vars.PGADMIN_DEFAULT_EMAIL }}
+          PGADMIN_DEFAULT_PASSWORD: ${{ vars.PGADMIN_DEFAULT_PASSWORD }}
+          SECRET_KEY: ${{ vars.SECRET_KEY }}
+          ALGORITHM: ${{ vars.ALGORITHM }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
