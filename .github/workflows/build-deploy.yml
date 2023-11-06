@@ -64,5 +64,5 @@ jobs:
           --target-port 8080 \
           --ingress external \
           --query properties.configuration.ingress.fqdn \
-          --environment-variables \
+          --env-vars \
             "DB_USERNAME"=${{ secrets.DB_USERNAME}} "DB_PASSWORD"=${{ secrets.DB_PASSWORD}} "DB_NAME"=${{ secrets.DB_NAME}} "HOST_SERVER"=${{ secrets.HOST_SERVER}} "DB_SERVER_PORT"=${{ secrets.DB_SERVER_PORT}} "SSL_MODE"=${{ secrets.SSL_MODE}} "SECRET_KEY"=${{ secrets.SECRET_KEY}} "ALGORITHM"=${{ secrets.ALGORITHM}}
