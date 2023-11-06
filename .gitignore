@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 #enviroments
+.vscode
 .env
 variables.sh
 
