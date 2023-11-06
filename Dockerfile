@@ -19,4 +19,4 @@ EXPOSE 8080
 #ENV SECRET_KEY=${SECRET_KEY}
 #ENV ALGORITHM=${ALGORITHM}
 
-CMD ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080:8080"]
